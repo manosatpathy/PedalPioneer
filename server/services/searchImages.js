@@ -3,7 +3,7 @@ require("dotenv").config();
 
 const searchImages = async (query) => {
   try {
-    const results = await axios.get(
+    const response = await axios.get(
       `https://api.unsplash.com/search/photos?query=${query}`,
       {
         headers: {
@@ -11,7 +11,7 @@ const searchImages = async (query) => {
         },
       }
     );
-    const photos = results.data.results.map((photo) => {
+    const photos = response.data.results.map((photo) => {
       return {
         imageUrl: photo.urls.regular,
         description: photo.description,
