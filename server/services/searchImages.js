@@ -7,7 +7,7 @@ const searchImages = async (query) => {
       `https://api.unsplash.com/search/photos?query=${query}`,
       {
         headers: {
-          Authorization: `CLIENT_ID ${process.env.UNSPLASH_ACCESS_KEY}`,
+          Authorization: `Client-ID ${process.env.UNSPLASH_ACCESS_KEY}`,
         },
       }
     );

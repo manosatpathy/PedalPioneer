@@ -1,4 +1,4 @@
-const searchImages = require("../services/searchImages.js");
+const searchImages = require("../services/searchImages");
 
 const searchPhotos = async (req, res) => {
   try {
