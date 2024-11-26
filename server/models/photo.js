@@ -12,5 +12,10 @@ module.exports = (sequelize, DataTypes) => {
       references: { model: "users", key: "id" },
     },
   });
+
+  Photo.associate = (model) => {
+    Photo.hasMany(model.Tag, { foreignKey: "photoId", as: "tags" });
+  };
+
   return Photo;
 };

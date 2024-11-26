@@ -6,5 +6,10 @@ module.exports = (sequelize, DataTypes) => {
       references: { model: "photos", key: "id" },
     },
   });
+
+  Tag.associate = (model) => {
+    Tag.belongsTo(model.Photo, { foreignKey: "photoId", as: "photo" });
+  };
+
   return Tag;
 };

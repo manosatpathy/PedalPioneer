@@ -1,22 +1,19 @@
-'use strict';
-
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    /**
-     * Add altering commands here.
-     *
-     * Example:
-     * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
-     */
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable("searchHistories", {
+      id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
+      query: { type: Sequelize.STRING, allowNull: false },
+      userId: {
+        type: Sequelize.INTEGER,
+        references: { model: "users", key: "id" },
+        onDelete: "CASCADE",
+      },
+      timestamp: { type: Sequelize.DATE, defaultValue: Sequelize.NOW },
+      createdAt: { type: Sequelize.DATE, defaultValue: Sequelize.NOW },
+      updatedAt: { type: Sequelize.DATE, defaultValue: Sequelize.NOW },
+    });
   },
-
-  async down (queryInterface, Sequelize) {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
-  }
+  down: async (queryInterface) => {
+    await queryInterface.dropTable("searchHistories");
+  },
 };
