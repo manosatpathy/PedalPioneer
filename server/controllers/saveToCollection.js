@@ -30,7 +30,7 @@ const saveToCollection = async (req, res) => {
     for (const tag of tags) {
       await Tag.create({ name: tag, photoId: photo.id });
     }
-    return res.status(201).json({ message: "photo saved to the collection." });
+    return res.status(201).json({ message: "Photo saved successfully." });
   } catch (err) {
     return res
       .status(500)
