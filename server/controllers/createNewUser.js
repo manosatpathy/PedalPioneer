@@ -1,12 +1,12 @@
-const isExist = require("../services/doesUserExist.js");
+const doesUserExist = require("../services/doesUserExist.js");
 const validateUser = require("../validation/userValidation.js");
-const user = require("../models/user.js");
+const {user} = require("../models");
 
 const createNewUser = async (req, res) => {
   try {
     const { username, email } = req.body;
-    const isUserExist = await isExist(email);
-    if (isUserExist) {
+    const userExists = await doesUserExist(email);
+    if (userExists) {
       return res.status(400).json({ message: "User already exists" });
     }
 

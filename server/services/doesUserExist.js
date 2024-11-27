@@ -1,7 +1,8 @@
-const user = require("../models/user");
+const { user } = require("../models");
 
 const doesUserExist = async (email) => {
   try {
+    console.log(user);
     const isExist = await user.findOne({ where: { email } });
     return !!isExist;
   } catch (err) {

@@ -7,8 +7,8 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  Tag.associate = (model) => {
-    Tag.belongsTo(model.Photo, { foreignKey: "photoId", as: "photo" });
+  Tag.associate = (models) => {
+    Tag.belongsTo(models.photo, { foreignKey: "photoId", as: "photo" });
   };
 
   return Tag;

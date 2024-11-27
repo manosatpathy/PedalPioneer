@@ -13,8 +13,8 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  Photo.associate = (model) => {
-    Photo.hasMany(model.Tag, { foreignKey: "photoId", as: "tags" });
+  Photo.associate = (models) => {
+    Photo.hasMany(models.tag, { foreignKey: "photoId", as: "tags" });
   };
 
   return Photo;
