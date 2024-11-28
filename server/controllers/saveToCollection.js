@@ -1,6 +1,6 @@
 const { validateTags, validateUrl } = require("../validation/imageValidation");
-const Photo = require("../models/photo.js");
-const Tag = require("../models/tag.js");
+const { photo } = require("../models");
+const { tag } = require("../models");
 
 const saveToCollection = async (req, res) => {
   try {
@@ -21,14 +21,14 @@ const saveToCollection = async (req, res) => {
           "Invalid tags: Maximum 5 tags allowed, each up to 20 characters.",
       });
     }
-    const photo = await Photo.create({
+    const image = await photo.create({
       imageUrl,
       description,
       altDescription,
       userId,
     });
-    for (const tag of tags) {
-      await Tag.create({ name: tag, photoId: photo.id });
+    for (const tagName of tags) {
+      await tag.create({ name: tagName, photoId: image.id });
     }
     return res.status(201).json({ message: "Photo saved successfully." });
   } catch (err) {
