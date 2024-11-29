@@ -1,4 +1,5 @@
-const { validateTags, validateUrl } = require("../validation/imageValidation");
+const { validateUrl } = require("../validation/imageValidation");
+const { validateTagFormat } = require("../validation/tagValidation");
 const { photo } = require("../models");
 const { tag } = require("../models");
 
@@ -10,15 +11,14 @@ const saveToCollection = async (req, res) => {
         message: "Missing required fields: imageUrl and/or tags.",
       });
     }
-    const isUrlValid = validateUrl(imageUrl);
-    const isTagValid = validateTags(tags);
-    if (!isUrlValid) {
-      return res.status(400).json({ message: "Invalid image URL." });
+    const urlFormat = validateUrl(imageUrl);
+    const tagFormat = validateTagFormat(tags);
+    if (!urlFormat.valid) {
+      return res.status(400).json({ message: urlFormat.message });
     }
-    if (!isTagValid) {
+    if (!tagFormat.valid) {
       return res.status(400).json({
-        message:
-          "Invalid tags: Maximum 5 tags allowed, each up to 20 characters.",
+        message: tagFormat.message,
       });
     }
     const image = await photo.create({

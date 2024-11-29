@@ -1,10 +1,8 @@
 const validateUrl = (url) => {
-  return url.startsWith("https://images.unsplash.com/");
+  if (!url.startsWith("https://images.unsplash.com/")) {
+    return { valid: false, message: "Invalid image URL." };
+  }
+  return { valid: true };
 };
 
-const validateTags = (tags) =>
-  Array.isArray(tags) &&
-  tags.length <= 5 &&
-  tags.every((tag) => tag.length <= 20);
-
-module.exports = { validateTags, validateUrl };
+module.exports = { validateUrl };
