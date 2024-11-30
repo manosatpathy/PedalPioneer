@@ -10,5 +10,11 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: DataTypes.NOW,
     },
   });
+  SearchHistory.associate = (models) => {
+    SearchHistory.belongsTo(models.user, {
+      foreignKey: "userId",
+      as: "user",
+    });
+  };
   return SearchHistory;
 };

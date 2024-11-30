@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Photo.associate = (models) => {
+    Photo.belongsTo(models.user, { foreignKey: "userId", as: "user" });
+  };
+
+  Photo.associate = (models) => {
     Photo.hasMany(models.tag, { foreignKey: "photoId", as: "tags" });
   };
 
