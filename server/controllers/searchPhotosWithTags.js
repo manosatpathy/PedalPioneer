@@ -16,6 +16,10 @@ const searchPhotosWithTags = async (req, res) => {
         return res.status(404).json({ message: "User does not exist." });
       }
     }
+    await searchHistory.create({
+      userId,
+      query: tags,
+    });
     const tagRecords = await tag.findAll({
       where: { name: tags },
       attributes: ["photoId"],
@@ -26,13 +30,6 @@ const searchPhotosWithTags = async (req, res) => {
         .json({ message: "No photos found for the provided tag." });
     }
     const photoIds = tagRecords.map((record) => record.photoId);
-
-    if (userId) {
-      await searchHistory.create({
-        userId,
-        query: tags,
-      });
-    }
     const sortOrder = sort || "ASC";
     const photos = await photo.findAll({
       where: { id: { [Op.in]: photoIds } },
