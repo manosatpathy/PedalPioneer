@@ -7,9 +7,11 @@ app.use(express.json());
 
 const photosRoutes = require("./routes/photos.js");
 const usersRoutes = require("./routes/user.js");
+const searchHistory = require("./routes/searchHistory.js");
 
 app.use("/api", photosRoutes);
 app.use("/api", usersRoutes);
+app.use("/api", searchHistory);
 
 sequelize
   .authenticate()
