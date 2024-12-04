@@ -15,7 +15,7 @@ const displaySearchHistory = async (req, res) => {
       where: { userId },
       attributes: ["query", "timestamp"],
     });
-    return res.status(200).json(searchHistories);
+    return res.status(200).json({ searchHistory: searchHistories });
   } catch (err) {
     return res.status(
       (500).json({
