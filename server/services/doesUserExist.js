@@ -5,7 +5,6 @@ const doesUserExist = async (email) => {
     const isExist = await user.findOne({ where: { email } });
     return !!isExist;
   } catch (err) {
-    console.error("Error checking user existence.", err);
     throw err;
   }
 };
