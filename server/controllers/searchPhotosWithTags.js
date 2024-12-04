@@ -50,7 +50,7 @@ const searchPhotosWithTags = async (req, res) => {
       dateSaved: photo.dateSaved,
       tags: photo.tags.map((t) => t.name),
     }));
-    return res.status(200).json(result);
+    return res.status(200).json({ photos: result });
   } catch (err) {
     return res.status(500).json({
       message: "An error occurred while fetching photos.",
