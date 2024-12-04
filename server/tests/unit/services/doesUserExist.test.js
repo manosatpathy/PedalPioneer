@@ -8,6 +8,10 @@ jest.mock("../../../models", () => ({
 }));
 
 describe("test doesUserExist service", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it("should return true if the user exist", async () => {
     user.findOne.mockResolvedValue({ id: 1, email: "manosatpathy@gmail.com" });
     const result = await doesUserExist("manosatpathy@gmail.com");
